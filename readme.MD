@@ -1,0 +1,8 @@
+# YOJO BACKEND
+
+## LANGUAGE
+- Python3
+
+## FRAMEWORK
+- FastAPI
+
