@@ -6,7 +6,7 @@ from fastapi.responses import FileResponse
 import logging
 
 # router import
-# from router import serve, model, params
+from router import image
 
 logger = logging.getLogger()
 
@@ -14,7 +14,7 @@ app = FastAPI()
 # database = db.Serving()
 
 # router include
-# app.include_router(serve.router)
+app.include_router(image.router)
 # app.include_router(model.router)
 # app.include_router(params.router)
 
@@ -23,7 +23,6 @@ origins = [
     "http://localhost:3000",
     "http://localhost:5500",
     "http://localhost:8000",
-    "http://stacker-demo.tk"
 ]
 
 app.add_middleware(
@@ -34,7 +33,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount('/static',StaticFiles(directory="./"),name='static')
+
+@app.get('/')
+def root():
+    return {'message': 'hello FastAPI!'}
+
+# app.mount('/static',StaticFiles(directory="./"),name='static')
 
 
 
