@@ -7,15 +7,19 @@ import logging
 
 # router import
 from router import image
+from router import ai
+from router import cam
 
 logger = logging.getLogger()
 
 app = FastAPI()
-# database = db.Serving()
+# database = database.Serving()
 
 # router include
 app.include_router(image.router)
-# app.include_router(model.router)
+app.include_router(ai.router)
+app.include_router(cam.router)
+# app.include_router(database.router)
 # app.include_router(params.router)
 
 origins = [
@@ -51,14 +55,14 @@ def root():
 #     return {"result": True}
 #
 #
-# @app.get('/api/load/model')
+# @app.get('/api/load/database')
 # def loadModel():
-#     logger.info("load model function")
+#     logger.info("load database function")
 #     dbModelList = database.selectAllModel()
 #     modelList = []
 #     for m in dbModelList:
 #         modelList.append(m['modelname'])
-#     return {'model': modelList}
+#     return {'database': modelList}
 #
 #
 # @app.get('/api/load/params')
@@ -77,7 +81,7 @@ def root():
 #     return result
 #
 #
-# @app.post("/api/save/model")
+# @app.post("/api/save/database")
 # async def saveModel(filename: str = Form(), file: UploadFile = File()):
 #     content = await file.read()
 #     UPLOAD_DIRECTORY = "./model_data"
