@@ -1,5 +1,6 @@
 from sqlalchemy.exc import SQLAlchemyError
 import httpx, asyncio, ast, re
+import datetime
 
 # database setting
 from database import dbconfig
@@ -41,8 +42,6 @@ def findPose(pose_name):
         i = 1
         image_name = -1
         for d in data:
-            print(d.position_name)
-            print(pose_name)
             if d.position_name == pose_name:
                 image_name = str(i)
                 break
@@ -75,3 +74,19 @@ def loadKey(index):
     session.close()
     return result
 
+def saveUpload(fileName,poseName,score,author,imagePath):
+    session = engine.sessionMaker()
+    try:
+        result = Result(image_name=fileName,position_name=poseName,score=score,author=author,created_at=datetime.datetime.now(),image_path=imagePath)
+        # data = session.query(Result).filter(Keypoint.image_name == (str(index) + '.jpg')).first()
+        print(result)
+        session.add(result)
+        session.commit()
+        session.refresh(result)
+
+    except SQLAlchemyError as e:
+        print(e)
+        session.close()
+        return {'success': False, 'message': 'DB Error'}
+    session.close()
+    return
