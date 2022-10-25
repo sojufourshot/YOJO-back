@@ -3,8 +3,10 @@ from sqlalchemy.orm import sessionmaker
 
 app = {
     'name': 'mysql+pymysql',
+    # 'user': 'mas',
+    # 'password': '1234',
     'user': 'root',
-    'password': '1234!',
+    'password': 'kjw9348792!',
     'host': 'localhost',
     'dbconn': 'yojo',
     'port': '3306',
