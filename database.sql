@@ -28,7 +28,6 @@ create table keypoint
     width      int         not null,
     height     int         not null,
     keypoints  text        not null,
-    foreign key (image_name) references result (image_name) on update cascade
 );
 
 
