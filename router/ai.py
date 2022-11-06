@@ -18,15 +18,7 @@ router = APIRouter(
 def checkRoute():
     return {'message': 'ai router check OK'}
 
-
-
-@router.get('/{pose_type}')
-def loadImage(pose_type: int):
-    result = crud.loadPoseList(pose_type)
-    return result
-
-
-@router.get('/detail/{pose_name}')
-def loadChoosePose(pose_name: str):
-    result = crud.loadPoseDetail(pose_name)
-    return result
+@router.get('/{idx}')
+def loadKeypoint(idx:int):
+    data = crud.loadKey(idx)
+    return data
